@@ -5,21 +5,16 @@ from bs4 import BeautifulSoup
 import joblib
 import streamlit as st
 
-# -------------------------------
 # STEP 1: Load your trained sentiment model and vectorizer
-# -------------------------------
+
 
 # Load the Logistic Regression (or similar) model
 model = joblib.load("twitter_sentiment_model_3class.sav")
 
-
-
-# Load the vectorizer (e.g., TF-IDF)
+# Load the vectorizer 
 vectorizer = joblib.load("tfidf_vectorizer_3class.sav")
 
-# -------------------------------
 # STEP 2: Function to scrape reviews from Amazon page
-# -------------------------------
 
 def extract_reviews_amazon(url):
     """
@@ -51,9 +46,7 @@ def extract_reviews_amazon(url):
 
     return reviews
 
-# -------------------------------
 # STEP 3: Prediction function using your .sav model
-# -------------------------------
 
 def predict_sentiment(text):
     """Predict the sentiment of a single text input using the trained model."""
@@ -61,9 +54,7 @@ def predict_sentiment(text):
     prediction = model.predict(X)[0]
     return prediction
 
-# -------------------------------
 # STEP 4: Analyze all reviews from a URL
-# -------------------------------
 
 def analyze_reviews(url):
     reviews = extract_reviews_amazon(url)
@@ -93,9 +84,7 @@ def analyze_reviews(url):
 
     return summary, reviews
 
-# -------------------------------
 # STEP 5: Streamlit Web Interface
-# -------------------------------
 
 def main():
     st.title("🛍️ Product Review Sentiment Analyzer")
@@ -122,3 +111,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
